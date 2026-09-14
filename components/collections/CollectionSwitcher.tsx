@@ -67,7 +67,7 @@ export default function CollectionSwitcher({
       </AnimatePresence>
 
       <div className="wrap relative py-20 sm:py-24">
-        <p className="eyebrow text-[color:var(--c-accent)]">The collections</p>
+        <p className="eyebrow text-[color:var(--c-paper)]">The collections</p>
         <Heading
           id="collections-heading"
           className="display mt-3 max-w-[18ch] text-[clamp(2rem,5.2vw,3.8rem)] leading-[0.95] text-paper-light"
@@ -97,7 +97,7 @@ export default function CollectionSwitcher({
                     <span
                       className={cn(
                         "eyebrow w-6 shrink-0 text-[0.625rem] transition-colors",
-                        isActive ? "text-[color:var(--c-accent)]" : "text-paper-light/35",
+                        isActive ? "text-[color:var(--c-paper)]" : "text-paper-light/55",
                       )}
                     >
                       {String(products.indexOf(product) + 1).padStart(2, "0")}
@@ -120,7 +120,7 @@ export default function CollectionSwitcher({
                         "ml-auto hidden shrink-0 items-center gap-2 text-[0.625rem] font-bold uppercase tracking-[0.18em] transition-opacity sm:flex",
                         isActive ? "opacity-100" : "opacity-0",
                       )}
-                      style={{ color: active.motif.palette.accent }}
+                      style={{ color: active.motif.palette.paper }}
                     >
                       View Product →
                     </span>

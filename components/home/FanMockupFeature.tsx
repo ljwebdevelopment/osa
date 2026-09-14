@@ -50,7 +50,7 @@ export default function FanMockupFeature({ products }: { products: Product[] }) 
           viewport={{ once: true, amount: 0.5 }}
           variants={revealUp}
         >
-          <p className="eyebrow text-[color:var(--c-primary)]">Inside every pack</p>
+          <p className="eyebrow text-[color:var(--c-ink)]">Inside every pack</p>
           <h2
             id="fan-feature-heading"
             className="display ink-offset mt-3 text-[clamp(2.2rem,6vw,4.5rem)] leading-none"

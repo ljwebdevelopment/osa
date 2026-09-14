@@ -76,7 +76,7 @@ export default async function CollectionPage({
 
         <div className="wrap relative grid gap-10 py-16 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="eyebrow text-[color:var(--c-accent)]">
+            <p className="eyebrow text-[color:var(--c-paper)]">
               The {product.name} collection
             </p>
             <h1
