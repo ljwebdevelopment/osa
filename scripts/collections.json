@@ -1,0 +1,11 @@
+[
+  { "slug": "paradise", "filePrefix": "paradise" },
+  { "slug": "day-trip", "filePrefix": "daytrip" },
+  { "slug": "deep-end", "filePrefix": "deepend" },
+  { "slug": "high-seas", "filePrefix": "highseas" },
+  { "slug": "lucky-break", "filePrefix": "luckybreak" },
+  { "slug": "night-garden", "filePrefix": "NightGarden" },
+  { "slug": "odd-garden", "filePrefix": "oddgarden" },
+  { "slug": "space-case", "filePrefix": "spacecase" },
+  { "slug": "summer-of-love", "filePrefix": "summeroflove" }
+]

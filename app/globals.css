@@ -1,0 +1,388 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand ground: warm press-stock cream, deep ink, and the three inks that
+     recur across the collection artwork. */
+  --color-paper: #f4e7cd;
+  --color-paper-deep: #e8d7b6;
+  --color-paper-light: #faf2e2;
+  --color-ink: #1a1209;
+  --color-ink-soft: #4a3a27;
+  --color-ember: #e2512a;
+  --color-surf: #1d7a76;
+  --color-gold: #f0a63c;
+  --color-dusk: #2a1206;
+
+  --font-display: var(--font-rye), Georgia, serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-paper: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-drift: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@layer base {
+  :root {
+    /* Defaults; every collection-scoped section overrides these inline. */
+    --c-primary: var(--color-ember);
+    --c-secondary: var(--color-surf);
+    --c-accent: var(--color-gold);
+    --c-ink: var(--color-ink);
+    --c-paper: var(--color-paper);
+
+    --header-h: 64px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    /* Never let an expressive layer push the page sideways. */
+    overflow-x: hidden;
+  }
+
+  /* Paper grain over the whole document. Sits above backgrounds, below
+     content, and never intercepts pointer events. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: var(--c-primary);
+    color: var(--color-paper-light);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* On dark collection grounds the ink outline disappears, so flip it. */
+  [data-ground="dark"] :focus-visible {
+    outline-color: var(--color-paper-light);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* ---------- Type treatments ---------- */
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+  }
+
+  .editorial {
+    font-family: var(--font-serif);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Slightly mis-registered ink, the way a two-colour screen print sits. */
+  .ink-offset {
+    text-shadow:
+      0.035em 0.035em 0 color-mix(in srgb, var(--c-primary) 65%, transparent),
+      -0.02em -0.02em 0 color-mix(in srgb, var(--c-secondary) 40%, transparent);
+  }
+
+  .chromatic {
+    text-shadow:
+      -0.022em 0 0 color-mix(in srgb, var(--c-primary) 80%, transparent),
+      0.022em 0 0 color-mix(in srgb, var(--c-secondary) 80%, transparent);
+  }
+
+  /* ---------- Surfaces ---------- */
+
+  .halftone {
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--c-ink) 22%, transparent) 1px,
+      transparent 1.4px
+    );
+    background-size: 6px 6px;
+  }
+
+  .card-edge {
+    border: 2px solid var(--color-ink);
+    box-shadow: 5px 5px 0 var(--color-ink);
+  }
+
+  .card-edge-soft {
+    border: 2px solid color-mix(in srgb, var(--c-ink) 55%, transparent);
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--c-ink) 35%, transparent);
+  }
+
+  /* ---------- Controls (the stable commerce layer) ---------- */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 2px solid var(--color-ink);
+    cursor: pointer;
+    transition:
+      transform 0.18s var(--ease-paper),
+      box-shadow 0.18s var(--ease-paper),
+      background-color 0.18s var(--ease-paper);
+  }
+
+  .btn-primary {
+    background: var(--c-primary);
+    color: var(--color-paper-light);
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+
+  .btn-secondary {
+    background: var(--color-paper-light);
+    color: var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+
+  .btn-quiet {
+    background: transparent;
+    color: currentColor;
+    border-color: currentColor;
+    box-shadow: none;
+  }
+
+  .btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+
+  .btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--color-ink);
+  }
+
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .btn-quiet:hover:not(:disabled) {
+    box-shadow: 3px 3px 0 currentColor;
+  }
+
+  .link-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color 0.2s var(--ease-paper);
+  }
+
+  .link-underline:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+@layer utilities {
+  .wrap {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* The fan spreads wider than its booklet — nothing in its ancestry may clip. */
+  .no-clip {
+    overflow: visible;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Ambient motion. Everything here is decoration: it is marked [data-ambient]
+   so reduced-motion can stop all of it in one rule without touching the
+   commerce layer's own transitions.
+   --------------------------------------------------------------------------- */
+
+@keyframes osa-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(var(--drift-x, 14px), var(--drift-y, -18px), 0)
+      rotate(var(--drift-r, 6deg));
+  }
+}
+
+@keyframes osa-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: var(--breathe-min, 0.55);
+  }
+  50% {
+    transform: scale(var(--breathe-scale, 1.08));
+    opacity: var(--breathe-max, 0.85);
+  }
+}
+
+@keyframes osa-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes osa-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes osa-sway {
+  0%,
+  100% {
+    transform: translateX(-2%) skewX(0deg);
+  }
+  50% {
+    transform: translateX(2%) skewX(1.5deg);
+  }
+}
+
+@keyframes osa-rise {
+  0% {
+    transform: translateY(12%) scale(0.9);
+    opacity: 0;
+  }
+  18% {
+    opacity: var(--rise-opacity, 0.7);
+  }
+  82% {
+    opacity: var(--rise-opacity, 0.7);
+  }
+  100% {
+    transform: translateY(-115%) scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes osa-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes osa-marquee-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes osa-scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes osa-trail-fade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--trail-rot, 0deg))
+      scale(calc(var(--trail-scale, 1) * 0.45));
+  }
+  22% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) rotate(var(--trail-rot, 0deg))
+      scale(var(--trail-scale, 1));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -72%)
+      rotate(calc(var(--trail-rot, 0deg) + 26deg))
+      scale(calc(var(--trail-scale, 1) * 0.82));
+  }
+}
+
+@keyframes osa-hue {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(14deg);
+  }
+}
+
+[data-ambient] {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ambient] {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ambient layers are tuned to be legible mid-animation, so freezing them
+     leaves a composed static print rather than a half-finished frame. */
+  [data-ambient][data-rest-opacity] {
+    opacity: var(--rest-opacity, 0.55) !important;
+    transform: none !important;
+  }
+}
