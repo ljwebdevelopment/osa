@@ -8,6 +8,7 @@ import StickyMobileBuyBar from "@/components/product/StickyMobileBuyBar";
 import FanShowcase from "@/components/product/FanShowcase";
 import PsychedelicBackdrop from "@/components/collections/PsychedelicBackdrop";
 import SectionHeading from "@/components/layout/SectionHeading";
+import SafeImage from "@/components/system/SafeImage";
 import { motifVars } from "@/lib/collection-motifs";
 import {
   getAllProducts,
@@ -58,10 +59,23 @@ export default async function ProductPage({
       />
 
       <section className="relative overflow-hidden border-b-2 border-ink bg-paper">
+        {/* The collection's own scene carries through from the card you
+            clicked, held well back so prices and copy stay easy to read. */}
+        <div aria-hidden className="absolute inset-0">
+          <SafeImage
+            src={product.media.background}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-paper/88" />
+        </div>
         <PsychedelicBackdrop
           motif={product.motif}
           intensity="calm"
-          opacity={0.14}
+          opacity={0.12}
         />
 
         <div className="wrap relative py-10 lg:py-16">

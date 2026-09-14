@@ -23,9 +23,9 @@ import { cn } from "@/lib/utils";
  */
 
 const DENSITY: Record<MotionIntensity, number> = {
-  calm: 0.65,
-  medium: 1,
-  high: 1.35,
+  calm: 0.5,
+  medium: 0.75,
+  high: 1,
 };
 
 export default function PsychedelicBackdrop({
@@ -74,16 +74,16 @@ export default function PsychedelicBackdrop({
               colors={[accent, primary, paper]}
               count={Math.round(4 * d)}
               seedKey={seedKey}
-              opacity={0.5}
+              opacity={0.3}
             />
-            <RayBurst color={paper} rays={28} duration={200} opacity={0.14} />
-            <WaveLines color={paper} lines={5} opacity={0.22} amplitude={14} />
+            <RayBurst color={paper} rays={28} duration={200} opacity={0.18} />
+            <WaveLines color={paper} lines={5} opacity={0.26} amplitude={14} />
             <GlyphDrift
               glyphs={glyphs}
               color={paper}
               count={Math.round(6 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.22}
+              opacity={0.12}
             />
           </>
         );
@@ -99,7 +99,8 @@ export default function PsychedelicBackdrop({
               style={
                 {
                   background: `conic-gradient(from 0deg at 50% 45%, ${primary}, ${accent}, ${secondary}, ${paper}, ${primary})`,
-                  "--rest-opacity": 1,
+                  opacity: 0.72,
+                  "--rest-opacity": 0.72,
                   animation: "osa-spin 180s linear infinite",
                 } as React.CSSProperties
               }
@@ -108,17 +109,17 @@ export default function PsychedelicBackdrop({
               colors={[paper, accent, secondary]}
               count={Math.round(5 * d)}
               seedKey={seedKey}
-              opacity={0.45}
+              opacity={0.28}
               blur={80}
             />
-            <RingField color={paper} rings={Math.round(7 * d)} opacity={0.2} />
+            <RingField color={paper} rings={Math.round(7 * d)} opacity={0.12} />
             <RayBurst color={paper} rays={36} duration={150} reverse opacity={0.12} />
             <GlyphDrift
               glyphs={glyphs}
               color={paper}
               count={Math.round(7 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.26}
+              opacity={0.13}
             />
           </>
         );
@@ -138,7 +139,7 @@ export default function PsychedelicBackdrop({
               colors={[primary, secondary]}
               count={Math.round(3 * d)}
               seedKey={seedKey}
-              opacity={0.4}
+              opacity={0.25}
               blur={80}
             />
             <ParticleField
@@ -155,7 +156,7 @@ export default function PsychedelicBackdrop({
               color={accent}
               count={Math.round(5 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.3}
+              opacity={0.15}
             />
           </>
         );
@@ -170,15 +171,15 @@ export default function PsychedelicBackdrop({
                 background: `linear-gradient(185deg, ${paper} 0%, ${paper} 38%, ${primary} 100%)`,
               }}
             />
-            <WaveLines color={primary} lines={Math.round(9 * d)} opacity={0.34} amplitude={20} />
-            <RingField color={primary} rings={4} opacity={0.16} duration={30} />
+            <WaveLines color={primary} lines={Math.round(10 * d)} opacity={0.38} amplitude={20} />
+            <RingField color={primary} rings={4} opacity={0.1} duration={30} />
             <RayBurst color={primary} rays={32} duration={260} opacity={0.1} />
             <GlyphDrift
               glyphs={glyphs}
               color={motif.palette.ink}
               count={Math.round(5 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.2}
+              opacity={0.11}
             />
           </>
         );
@@ -207,7 +208,7 @@ export default function PsychedelicBackdrop({
               color={primary}
               count={Math.round(6 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.3}
+              opacity={0.15}
             />
           </>
         );
@@ -226,7 +227,7 @@ export default function PsychedelicBackdrop({
               colors={[primary, secondary]}
               count={Math.round(3 * d)}
               seedKey={seedKey}
-              opacity={0.45}
+              opacity={0.28}
               blur={70}
             />
             <ParticleField
@@ -241,7 +242,7 @@ export default function PsychedelicBackdrop({
               color={accent}
               count={Math.round(6 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.26}
+              opacity={0.13}
             />
           </>
         );
@@ -257,7 +258,7 @@ export default function PsychedelicBackdrop({
               }}
             />
             <RayBurst color={primary} secondary={accent} rays={22} duration={140} opacity={0.16} />
-            <RingField color={accent} rings={Math.round(6 * d)} opacity={0.2} duration={18} />
+            <RingField color={accent} rings={Math.round(6 * d)} opacity={0.12} duration={18} />
             {/* Only at full strength: on a quiet, pale section a faint grid
                 would read as a transparency checkerboard, not as artwork. */}
             {level !== "calm" && (
@@ -281,7 +282,7 @@ export default function PsychedelicBackdrop({
               color={paper}
               count={Math.round(8 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.3}
+              opacity={0.15}
             />
           </>
         );
@@ -303,12 +304,12 @@ export default function PsychedelicBackdrop({
               size={3}
               opacity={0.85}
             />
-            <RingField color={primary} rings={Math.round(5 * d)} opacity={0.18} duration={34} />
+            <RingField color={primary} rings={Math.round(5 * d)} opacity={0.11} duration={34} />
             <BlobField
               colors={[primary, secondary, accent]}
               count={Math.round(3 * d)}
               seedKey={seedKey}
-              opacity={0.35}
+              opacity={0.22}
               blur={90}
             />
             <RayBurst color={primary} rays={30} duration={300} reverse opacity={0.08} />
@@ -317,7 +318,7 @@ export default function PsychedelicBackdrop({
               color={paper}
               count={Math.round(5 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.28}
+              opacity={0.14}
             />
           </>
         );
@@ -337,15 +338,15 @@ export default function PsychedelicBackdrop({
               colors={[accent, paper, secondary]}
               count={Math.round(4 * d)}
               seedKey={seedKey}
-              opacity={0.42}
+              opacity={0.26}
             />
-            <WaveLines color={paper} lines={5} opacity={0.2} amplitude={16} />
+            <WaveLines color={paper} lines={5} opacity={0.24} amplitude={16} />
             <GlyphDrift
               glyphs={glyphs}
               color={paper}
               count={Math.round(7 * d)}
               seedKey={`${seedKey}-glyph`}
-              opacity={0.28}
+              opacity={0.14}
             />
           </>
         );

@@ -125,7 +125,7 @@ export default function HeroProductViewer({ product }: { product: Product }) {
           initial="hidden"
           animate="visible"
           variants={revealUp}
-          className="eyebrow text-[color:var(--c-accent)]"
+          className="eyebrow text-[color:var(--c-paper)]"
         >
           Small-batch filter tips · {product.papersPerPack} per pack
         </motion.p>

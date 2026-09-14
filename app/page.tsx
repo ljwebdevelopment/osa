@@ -16,14 +16,21 @@ import {
 export default function HomePage() {
   const hero = getHeroProduct();
   const all = getAllProducts();
-  const featured = getFeaturedProducts();
   const story = getProductBySlug("night-garden") ?? hero;
+
+  // The hero already gives Paradise a full screen, so the sections below it
+  // lead with something else and keep Paradise for the end of the list.
+  const previewOrder = [
+    ...all.filter((p) => p.slug !== hero.slug),
+    ...all.filter((p) => p.slug === hero.slug),
+  ];
+  const featured = getFeaturedProducts().filter((p) => p.slug !== hero.slug);
 
   return (
     <>
       <HeroProductViewer product={hero} />
 
-      <CollectionSwitcher products={all} />
+      <CollectionSwitcher products={previewOrder} />
 
       <FanMockupFeature products={featured} />
 
@@ -36,7 +43,7 @@ export default function HomePage() {
             id="featured-heading"
             eyebrow="Featured"
             title="Start with these."
-            intro="Four packs that show the range — hover any booklet to see the papers inside."
+            intro="A few packs that show the range — hover any booklet to see the papers inside."
             action={
               <Link href="/shop" className="btn btn-secondary">
                 Shop all nine
