@@ -99,21 +99,69 @@ export function RayBurst({
   }
 
   return (
-    <div
-      data-ambient
-      data-rest-opacity
-      className="absolute left-1/2 top-1/2 aspect-square w-[160%] -translate-x-1/2 -translate-y-1/2 rounded-full"
-      style={
-        {
-          background: `conic-gradient(${stops.join(",")})`,
-          opacity,
-          "--rest-opacity": opacity,
-          maskImage:
-            "radial-gradient(circle at center, #000 12%, rgba(0,0,0,0.45) 48%, transparent 72%)",
-          animation: `${reverse ? "osa-spin-reverse" : "osa-spin"} ${duration}s linear infinite`,
-        } as React.CSSProperties
-      }
-    />
+    // Centring lives on the wrapper, rotation on the child. A rotate animation
+    // replaces the whole transform, so an element that is both centred by
+    // translate and spun would drag itself off-centre as it turned.
+    <div className="absolute inset-0 grid place-items-center">
+      <div
+        data-ambient
+        data-rest-opacity
+        className="aspect-square w-[160%] shrink-0 rounded-full"
+        style={
+          {
+            background: `conic-gradient(${stops.join(",")})`,
+            opacity,
+            "--rest-opacity": opacity,
+            maskImage:
+              "radial-gradient(circle at center, #000 12%, rgba(0,0,0,0.45) 48%, transparent 72%)",
+            animation: `${reverse ? "osa-spin-reverse" : "osa-spin"} ${duration}s linear infinite`,
+          } as React.CSSProperties
+        }
+      />
+    </div>
+  );
+}
+
+/**
+ * A wide, soft-edged wash of colour turning slowly behind everything else.
+ *
+ * Has to be far larger than its container and round: a full-bleed square with
+ * a conic gradient sweeps its own corners through the frame as it turns, and
+ * you end up watching a rotating box instead of moving colour.
+ */
+export function ColorWheel({
+  colors,
+  duration = 150,
+  opacity = 0.6,
+  size = "240%",
+}: {
+  colors: string[];
+  duration?: number;
+  opacity?: number;
+  size?: string;
+}) {
+  const ring = [...colors, colors[0]].join(", ");
+
+  return (
+    <div className="absolute inset-0 grid place-items-center">
+      <div
+        data-ambient
+        data-rest-opacity
+        className="aspect-square shrink-0 rounded-full"
+        style={
+          {
+            width: size,
+            background: `conic-gradient(from 0deg, ${ring})`,
+            opacity,
+            "--rest-opacity": opacity,
+            filter: "blur(28px)",
+            maskImage:
+              "radial-gradient(circle at center, #000 42%, rgba(0,0,0,0.6) 66%, transparent 84%)",
+            animation: `osa-spin ${duration}s linear infinite`,
+          } as React.CSSProperties
+        }
+      />
+    </div>
   );
 }
 

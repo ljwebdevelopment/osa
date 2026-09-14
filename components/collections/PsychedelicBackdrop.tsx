@@ -1,6 +1,7 @@
 import {
   BlobField,
   CheckerRibbon,
+  ColorWheel,
   GlyphDrift,
   GrainOverlay,
   LightShafts,
@@ -93,17 +94,17 @@ export default function PsychedelicBackdrop({
         return (
           <>
             <div
-              data-ambient
-              data-rest-opacity
               className="absolute inset-0"
-              style={
-                {
-                  background: `conic-gradient(from 0deg at 50% 45%, ${primary}, ${accent}, ${secondary}, ${paper}, ${primary})`,
-                  opacity: 0.72,
-                  "--rest-opacity": 0.72,
-                  animation: "osa-spin 180s linear infinite",
-                } as React.CSSProperties
-              }
+              style={{
+                background: `linear-gradient(165deg, ${paper} 0%, ${accent} 55%, ${secondary} 100%)`,
+                opacity: 0.5,
+              }}
+            />
+            <ColorWheel
+              colors={[primary, accent, secondary, paper]}
+              duration={180}
+              opacity={0.5}
+              size="260%"
             />
             <BlobField
               colors={[paper, accent, secondary]}
